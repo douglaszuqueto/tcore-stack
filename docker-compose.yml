@@ -1,0 +1,14 @@
+services:
+  # TagoCore
+  tcore:
+    image: tagoio/tagocore:beta
+    container_name: tcore
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+      - "1883:1883"
+    volumes:
+      - tcore-data:/root/.tagocore
+      - ./decoders:/root/decoders
+volumes:
+  tcore-data:
