@@ -1,0 +1,25 @@
+services:
+  # TagoCore
+  tcore:
+    container_name: tcore
+    image: tagoio/tagocore:beta
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+      - "1883:1883"
+    volumes:
+      - tcore-data:/root/.tagocore
+      - ../projects/decoders:/root/decoders
+  # Grafana
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:11.3.0
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+volumes:
+  tcore-data:
+  grafana-data:
