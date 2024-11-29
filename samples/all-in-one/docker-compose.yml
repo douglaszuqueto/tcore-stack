@@ -1,0 +1,39 @@
+services:
+  # TagoCore
+  tcore:
+    container_name: tcore
+    image: tagoio/tagocore:beta
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+      - "1883:1883"
+    volumes:
+      - tcore-data:/root/.tagocore
+      - ../projects/decoders:/root/decoders
+  # Postgres
+  postgres:
+    container_name: postgres
+    image: postgres:17-alpine
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: postgres
+  # Grafana
+  grafana:
+    image: grafana/grafana:11.3.0
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+volumes:
+  tcore-data:
+  grafana-data:
+  postgres-data:
