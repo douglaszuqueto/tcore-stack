@@ -1,7 +1,7 @@
 services:
   # TagoCore
   tcore:
-    image: tagoio/tagocore:beta
+    image: tagoio/tagocore:1.0.0-6-beta
     container_name: tcore
     restart: unless-stopped
     ports:
